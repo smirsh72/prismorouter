@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "prismorouter"
+version = "0.1.0"
+description = "Cost-aware LLM routing and model selection."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+authors = [
+  { name = "Prismo" }
+]
+keywords = ["llm", "routing", "ai", "cost-optimization", "model-selection"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://github.com/smirsh72/prismorouter"
+Repository = "https://github.com/smirsh72/prismorouter"
+
+[tool.hatch.build.targets.wheel]
+packages = ["prismo_router"]
+
