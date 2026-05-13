@@ -1,13 +1,14 @@
 # PrismoRouter
 
-PrismoRouter is the standalone routing engine extracted from Prismo. Give it a
-prompt and a list of model candidates, and it selects the cheapest capable model
-based on task complexity, safety/risk signals, model tier, context needs,
-latency, and optional Elo feedback.
+PrismoRouter is the routing engine behind Prismo, extracted into a standalone
+Python package.
 
-This repository contains only the router. It does not include the Prismo hosted
-dashboard, billing, auth, provider credential storage, FinOps workflows,
-provider proxy, semantic cache service, or frontend.
+It takes a prompt and a list of model candidates, then selects the cheapest
+model that can handle the request based on things like complexity, latency,
+capabilities, safety signals, and context size.
+
+This repo only contains the router itself. No hosted API, dashboard, auth,
+billing, proxy infrastructure, or provider key management.
 
 ## Install
 
@@ -71,23 +72,17 @@ print(decision.reason)
 
 ## What It Does
 
-- Uses Prismo's production-derived feature extraction, jailbreak detection,
-  complexity detection, heuristic scoring, hybrid scoring, cost-aware ranking,
-  latency-aware ranking, and Elo constants.
-- Builds a routing profile with a minimum recommended model tier.
-- Filters candidates by provider/family scope, capabilities, context window,
-  quality preference, and text-chat compatibility.
-- Ranks candidates using the same cost/quality formulas as the hosted router,
-  with standalone in-memory adapters instead of Prismo's database.
-- Returns a transparent routing decision with a score breakdown.
+- Analyzes prompts for complexity and risk.
+- Filters models by capabilities and context window.
+- Ranks candidates using cost, latency, and quality signals.
+- Returns a routing decision with scoring details.
 
 ## What It Does Not Do
 
-- It does not call OpenAI, Anthropic, or any other model provider.
-- It does not proxy requests.
-- It does not store API keys.
-- It does not include a database, dashboard, auth system, billing, or FinOps
-  enforcement.
+- Make provider API calls.
+- Proxy requests.
+- Store API keys.
+- Handle billing, auth, or dashboard logic.
 
 ## Development
 
