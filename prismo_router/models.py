@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Literal
+from typing import Any, Literal
 
 Tier = Literal["nano", "mini", "base", "premium"]
 Quality = Literal["low", "medium", "high", "auto"]
@@ -33,37 +33,13 @@ class ModelCandidate:
     tool_success_rate_7d: float = 1.0
     avg_ttft_ms: float | None = None
     avg_tpot_ms: float | None = None
+    p95_latency_ms: int | None = None
+    max_output: int = 0
+    id: int | None = None
 
-
-@dataclass(frozen=True)
-class RequestFeatures:
-    """Extracted features for a request."""
-
-    prompt: str
-    token_estimate: int
-    detected_task: str
-    question_type: str
-    detected_domain: str
-    risk_keywords: tuple[str, ...] = ()
-    has_code: bool = False
-    has_json: bool = False
-    has_list: bool = False
-    constraint_count: int = 0
-    jailbreak_detected: bool = False
-    jailbreak_confidence: float = 0.0
-    jailbreak_category: str | None = None
-
-
-@dataclass(frozen=True)
-class RoutingProfile:
-    """Router output describing what the request needs."""
-
-    task_type: str = "chat"
-    risk_level: Literal["low", "elevated"] = "low"
-    min_tier: Tier = "nano"
-    confidence: float = 1.0
-    explanation: str = ""
-    scores: dict[str, float] = field(default_factory=dict)
+    @property
+    def model_name(self) -> str:
+        return self.name
 
 
 @dataclass(frozen=True)
@@ -92,7 +68,6 @@ class RoutingDecision:
     optimized: bool
     confidence: float
     reason: str
-    profile: RoutingProfile
-    features: RequestFeatures
+    profile: Any
+    features: Any
     scores: dict[str, float] = field(default_factory=dict)
-

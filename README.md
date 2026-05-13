@@ -1,13 +1,13 @@
 # PrismoRouter
 
-PrismoRouter is a small Python library for cost-aware LLM model routing. Give it
-a prompt and a list of model candidates, and it selects the cheapest capable
-model based on task complexity, safety/risk signals, model tier, context needs,
+PrismoRouter is the standalone routing engine extracted from Prismo. Give it a
+prompt and a list of model candidates, and it selects the cheapest capable model
+based on task complexity, safety/risk signals, model tier, context needs,
 latency, and optional Elo feedback.
 
-This repository contains only the routing engine. It does not include the Prismo
-hosted dashboard, billing, auth, provider credential storage, FinOps workflows,
-or frontend.
+This repository contains only the router. It does not include the Prismo hosted
+dashboard, billing, auth, provider credential storage, FinOps workflows,
+provider proxy, semantic cache service, or frontend.
 
 ## Install
 
@@ -18,7 +18,7 @@ pip install prismorouter
 For local development:
 
 ```bash
-pip install -e .
+pip install -e ".[dev]"
 ```
 
 ## Quick Start
@@ -71,12 +71,14 @@ print(decision.reason)
 
 ## What It Does
 
-- Extracts task, structure, domain-risk, token, and safety signals from a prompt.
+- Uses Prismo's production-derived feature extraction, jailbreak detection,
+  complexity detection, heuristic scoring, hybrid scoring, cost-aware ranking,
+  latency-aware ranking, and Elo constants.
 - Builds a routing profile with a minimum recommended model tier.
-- Filters candidates by provider/family scope, capabilities, context window, and
-  quality preference.
-- Ranks candidates by reliability, cost, optional latency, and optional Elo
-  feedback.
+- Filters candidates by provider/family scope, capabilities, context window,
+  quality preference, and text-chat compatibility.
+- Ranks candidates using the same cost/quality formulas as the hosted router,
+  with standalone in-memory adapters instead of Prismo's database.
 - Returns a transparent routing decision with a score breakdown.
 
 ## What It Does Not Do
@@ -87,6 +89,13 @@ print(decision.reason)
 - It does not include a database, dashboard, auth system, billing, or FinOps
   enforcement.
 
+## Development
+
+```bash
+pip install -e ".[dev]"
+pytest -q
+```
+
 ## License And Attribution
 
 PrismoRouter is licensed under the Apache License, Version 2.0.
@@ -94,4 +103,3 @@ PrismoRouter is licensed under the Apache License, Version 2.0.
 Portions of the routing, scoring, complexity detection, prompt-injection
 detection, latency, and Elo approaches are adapted from vLLM Semantic Router.
 See [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).
-

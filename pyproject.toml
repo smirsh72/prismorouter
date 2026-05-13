@@ -9,6 +9,10 @@ description = "Cost-aware LLM routing and model selection."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "Apache-2.0"
+dependencies = [
+  "numpy>=1.24",
+  "pydantic>=2",
+]
 authors = [
   { name = "Prismo" }
 ]
@@ -28,6 +32,11 @@ classifiers = [
 Homepage = "https://github.com/smirsh72/prismorouter"
 Repository = "https://github.com/smirsh72/prismorouter"
 
+[project.optional-dependencies]
+local-embeddings = ["sentence-transformers>=2.7"]
+tokenizer = ["tiktoken>=0.7"]
+language = ["langdetect>=1.0.9"]
+dev = ["pytest>=8"]
+
 [tool.hatch.build.targets.wheel]
 packages = ["prismo_router"]
-
