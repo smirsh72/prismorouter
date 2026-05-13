@@ -1,0 +1,16 @@
+PrismoRouter
+Copyright 2026 Prismo
+
+This product includes code, algorithms, and implementation ideas adapted from
+vLLM Semantic Router.
+
+vLLM Semantic Router
+Source: https://github.com/vllm-project/semantic-router
+License: Apache License, Version 2.0
+Upstream commit checked: b8e23fb307bf508ae36958d3621445e10e709fe7
+
+Upstream copyright notices observed:
+Copyright 2025 vLLM Semantic Router.
+Copyright 2026 vLLM Semantic Router Contributors.
+
+No root upstream NOTICE file was present at the checked commit.

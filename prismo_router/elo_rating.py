@@ -1,4 +1,8 @@
-"""Standalone Elo rating system mirroring Prismo's router constants."""
+"""Standalone Elo rating system.
+
+Portions of this pairwise Elo implementation are adapted from vLLM Semantic
+Router and modified to use in-memory storage.
+"""
 
 from __future__ import annotations
 

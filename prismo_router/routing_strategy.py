@@ -1,10 +1,13 @@
 """
 Infrastructure/Strategy Layer - Provider-Agnostic Model Routing.
 
+Portions of this routing and cost-aware scoring approach are adapted from vLLM
+Semantic Router and modified for PrismoRouter's standalone Python API.
+
 ARCHITECTURE: Clean DB-Driven Routing
 =====================================
 1. REQUEST: User sends request with model preference (e.g., "gpt-4o", "claude-3-5-sonnet")
-2. DB LOOKUP: Get model metadata from DB (provider, family, tier)
+2. METADATA LOOKUP: Get model metadata (provider, family, tier)
 3. ROUTING SCOPE: Based on user settings, scope routing to:
    - "family": Same model family (gpt-4o → gpt-4o-mini)
    - "provider": Same provider (OpenAI → any OpenAI model)
@@ -16,8 +19,7 @@ ARCHITECTURE: Clean DB-Driven Routing
    - "auto": all tiers
 5. SELECTION: Pick cheapest model satisfying constraints.
 
-NO string parsing of model names at routing time.
-All model metadata comes from DB columns.
+Model metadata comes from the candidate repository passed to the router.
 """
 from abc import ABC, abstractmethod
 import re

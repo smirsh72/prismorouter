@@ -1,4 +1,8 @@
-"""Standalone TPOT/TTFT latency tracker using Prismo's EMA formula."""
+"""Standalone TPOT/TTFT latency tracker.
+
+Portions of this latency tracking approach are adapted from vLLM Semantic
+Router and modified to use in-memory storage.
+"""
 
 from __future__ import annotations
 
