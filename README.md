@@ -10,6 +10,12 @@ capabilities, safety signals, and context size.
 This repo only contains the router itself. No hosted API, dashboard, auth,
 billing, proxy infrastructure, or provider key management.
 
+## Why
+
+Most apps send every prompt to the same model. That gets expensive fast.
+PrismoRouter gives simple prompts to cheaper models and keeps harder prompts on
+stronger ones.
+
 ## Install
 
 ```bash
