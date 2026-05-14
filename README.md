@@ -1,20 +1,21 @@
-# PrismoRouter
+# prismorouter
 
-PrismoRouter is the routing engine behind Prismo, extracted into a standalone
-Python package.
+prismorouter is the routing engine behind prismo, extracted into a standalone
+python package.
 
-It takes a prompt and a list of model candidates, then selects the cheapest
-model that can handle the request based on things like complexity, latency,
-capabilities, safety signals, and context size.
+it takes a prompt and a list of model candidates, then picks the cheapest
+model that can handle the request based on complexity, latency, capabilities,
+safety checks, and context size.
 
-This repo only contains the router itself. No hosted API, dashboard, auth,
+this repo only includes the router itself. no hosted api, dashboard, auth,
 billing, proxy infrastructure, or provider key management.
 
-## Why
+## why
 
-Most apps send every prompt to the same model. That gets expensive fast.
-PrismoRouter gives simple prompts to cheaper models and keeps harder prompts on
-stronger ones.
+most apps send every prompt to the same model, which gets expensive fast.
+
+prismorouter routes simple prompts to cheaper models and keeps harder requests
+on stronger ones.
 
 ## Install
 
@@ -76,31 +77,32 @@ print(decision.selected_model)
 print(decision.reason)
 ```
 
-## What It Does
+## what it does
 
-- Analyzes prompts for complexity and risk.
-- Filters models by capabilities and context window.
-- Ranks candidates using cost, latency, and quality signals.
-- Returns a routing decision with scoring details.
+- analyzes prompts for complexity and risk
+- filters models by capabilities and context window
+- ranks candidates using cost, latency, and quality signals
+- returns a routing decision with scoring details
 
-## What It Does Not Do
+## what it does not do
 
-- Make provider API calls.
-- Proxy requests.
-- Store API keys.
-- Handle billing, auth, or dashboard logic.
+- make provider api calls
+- proxy requests
+- store api keys
+- handle billing, auth, or dashboard logic
 
-## Development
+## development
 
 ```bash
 pip install -e ".[dev]"
 pytest -q
 ```
 
-## License And Attribution
+## license and attribution
 
-PrismoRouter is licensed under the Apache License, Version 2.0.
+prismorouter is licensed under the apache license, version 2.0.
 
-Portions of the routing, scoring, complexity detection, prompt-injection
-detection, latency, and Elo approaches are adapted from vLLM Semantic Router.
-See [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).
+parts of the routing, scoring, complexity detection, prompt injection
+detection, latency, and elo logic were adapted from vllm semantic router.
+
+see [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).
